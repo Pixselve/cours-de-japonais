@@ -1,16 +1,16 @@
-<script lang="ts">
+<script>
 import PlayerFactory from 'youtube-player';
 import { onMount } from 'svelte';
-import type { YouTubePlayer } from 'youtube-player/dist/types';
+import { YouTubePlayer } from 'youtube-player/dist/types';
 import { doneCourses } from '../stores/courseProgress';
 import { beforeNavigate } from '$app/navigation';
 
-export let videoID: string;
+export let videoID;
 export let title;
 
 let playerElement;
 
-let player: YouTubePlayer;
+let player;
 let videoDuration = 0;
 let checkIfCompletedTimeout;
 onMount(async () => {
@@ -55,7 +55,7 @@ beforeNavigate(async () => {
 /**
  * Check if the user has watch at least 85% of the video
  */
-const checkIfCompleted = async (): Promise<boolean> => {
+const checkIfCompleted = async () => {
   const currentTime = await player.getCurrentTime();
   const percentage = (currentTime / videoDuration) * 100;
   console.log(`⏳ ${ Math.round(percentage) }% watched`);
