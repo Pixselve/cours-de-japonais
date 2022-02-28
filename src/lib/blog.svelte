@@ -1,7 +1,6 @@
 <script>
 import PlayerFactory from 'youtube-player';
 import { onMount } from 'svelte';
-import { YouTubePlayer } from 'youtube-player/dist/types';
 import { doneCourses } from '../stores/courseProgress';
 import { beforeNavigate } from '$app/navigation';
 
