@@ -1,20 +1,24 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import fs from "fs";
 import matter from 'gray-matter';
-import path from "path";
+import path, { join } from "path";
+import { fileURLToPath } from 'url';
 
 export const get: RequestHandler = async ({ params }) => {
 
   // Import all .svx files in the directory
   const { courseName } = params;
-  const chapters = fs.readdirSync(`src/routes/course/${ courseName }`).map(chapterName => {
+  console.log(import.meta.url);
+  const dirname = path.dirname(fileURLToPath(import.meta.url));
+  console.log(dirname);
+  const chapters = fs.readdirSync(join(dirname, `../${ courseName }`) ).map(chapterName => {
     let chapterFullName = chapterName;
     let lessons = [];
 
-    fs.readdirSync(`src/routes/course/${ courseName }/${ chapterName }`).forEach(lessonFile => {
+    fs.readdirSync(join(dirname, `../${ courseName }/${ chapterName }`)).forEach(lessonFile => {
       if (lessonFile === "_index.md") {
         const post = fs.readFileSync(
-          `src/routes/course/${ courseName }/${ chapterName }/${ lessonFile }`,
+          join(dirname, `../${ courseName }/${ chapterName }/${ lessonFile }`),
           "utf-8"
         );
         const { data } = matter(post)
@@ -22,7 +26,7 @@ export const get: RequestHandler = async ({ params }) => {
         return;
       }
       const post = fs.readFileSync(
-        `src/routes/course/${ courseName }/${ chapterName }/${ lessonFile }`,
+        join(dirname, `../${ courseName }/${ chapterName }/${ lessonFile }`),
         "utf-8"
       );
       lessons.push({
