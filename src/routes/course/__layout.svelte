@@ -1,16 +1,16 @@
 <main class="bg-gray-100 min-h-screen grid grid-cols-[350px_auto]">
   <section class="h-screen p-4">
     <nav class="p-5 bg-white rounded-3xl shadow-xl max-h-full space-y-5 overflow-y-auto">
-      <h1 class="font-black text-xl">L’écriture de la langue japonaise</h1>
+      <h1 class="font-black text-xl">{course.title}</h1>
       <div class="border-b"></div>
 
       <section class="space-y-5 text-sm">
-        {#each chapters as chapter}
-          <h2 class="font-bold text-black/50">{chapter.chapterName}</h2>
+        {#each course.chapters as chapter}
+          <h2 class="font-bold text-black/50">{chapter.title}</h2>
           <ol class="space-y-5">
-            {#each chapter.lessons as lesson, index}
+            {#each chapter.children as lesson, index}
               <li>
-                <a class="font-bold flex items-center space-x-4" href={"/course/" + lesson.path}>
+                <a class="font-bold flex items-center space-x-4" href={"/course" + lesson.path}>
                   <div class="text-3xl">
                     {index + 1}
                   </div>
@@ -43,8 +43,9 @@
 <script lang="ts">
 
 import { doneCourses } from "../../stores/courseProgress";
+import type { Course } from "../../utils/getCourses";
 
-export let chapters = [];
+export let course: Course;
 </script>
 
 <script lang="ts" context="module">
@@ -56,10 +57,10 @@ export const load: Load = async ({ fetch, url }) => {
   const regex = new RegExp(/^\/course\/([a-zA-Z0-9\-\.]+)\/.*$/g);
   const match = regex.exec(pathname);
   const course = match && match[1];
-  const { chapters } = await fetch(`/course/${ course }/chapters.json`).then(value => value.json());
+  const body = await fetch(`/course/${ course }/chapters.json`).then(value => value.json());
   return {
     props: {
-      chapters: chapters
+      course: body
     }
   };
 };
