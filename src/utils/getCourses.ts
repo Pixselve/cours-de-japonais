@@ -70,6 +70,7 @@ export default async function getCourses(): Promise<Course[]> {
 			videoID: value.videoID,
 			title: value.title,
 			weight: value.weight,
+			videoLength: value.videoLength,
 			path: `/${courseName}/${chapterName}/${fileName}`
 		});
 	});
