@@ -61,7 +61,7 @@ export default async function getCourses(): Promise<Course[]> {
 		if (resultObj[courseName]['chapters'][chapterName] === undefined) {
 			resultObj[courseName]['chapters'][chapterName] = { children: [], title: '' };
 		}
-		if (fileName === '_index') {
+		if (fileName === '_index' || fileName === 'index') {
 			resultObj[courseName]['chapters'][chapterName].title = value.title;
 			return;
 		}
