@@ -24,13 +24,13 @@
 </script>
 
 <main class="bg-gray-100 md:h-screen grid md:grid-cols-[350px_auto]">
-	<section class="p-4 space-y-4 order-2 md:order-1">
-		<a href="/" class="p-5 bg-white rounded-3xl shadow-xl md:inline-block hidden">
-			<svg class="h-7 aspect-square fill-japanRed" viewBox="0 0 24 24">
-				<path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-			</svg>
-		</a>
+	<section class="p-4 space-y-4 order-2 md:order-1 md:h-screen">
 		<nav class="p-5 bg-white rounded-3xl shadow-xl space-y-5 overflow-y-auto max-h-full">
+			<a href="/" class="bg-white rounded-xl p-2  md:inline-block hidden border border-black/10">
+				<svg class="h-7 aspect-square fill-japanRed" viewBox="0 0 24 24">
+					<path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+				</svg>
+			</a>
 			<h1 class="font-black text-xl">
 				<a class="hover:underline" href={`/course/${course.id}`}>{course.title}</a>
 			</h1>
