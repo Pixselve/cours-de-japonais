@@ -10,6 +10,7 @@ export interface Chapter {
 	path: string;
 	children: Child[];
 	id: string;
+	weight: number;
 }
 
 export interface Course {
@@ -34,7 +35,9 @@ export default async function getCourses(): Promise<Course[]> {
 
 	let resultObj: Record<
 		string,
-		{ chapters: Record<string, { children: any[]; title: string }>; title: string }
+		{ chapters: Record<string, {
+				weight: number;
+				children: any[]; title: string }>; title: string }
 	> = {};
 
 	videos.forEach((value) => {
@@ -59,10 +62,11 @@ export default async function getCourses(): Promise<Course[]> {
 		}
 
 		if (resultObj[courseName]['chapters'][chapterName] === undefined) {
-			resultObj[courseName]['chapters'][chapterName] = { children: [], title: '' };
+			resultObj[courseName]['chapters'][chapterName] = { children: [], title: '', weight: 0 };
 		}
 		if (fileName === '_index' || fileName === 'index') {
 			resultObj[courseName]['chapters'][chapterName].title = value.title;
+			resultObj[courseName]['chapters'][chapterName].weight = value.weight;
 			return;
 		}
 
@@ -86,6 +90,7 @@ export default async function getCourses(): Promise<Course[]> {
 				title: resultObj[resultObjKey].chapters[chaptersKey].title,
 				path: `/${resultObjKey}/${chaptersKey}`,
 				children: resultObj[resultObjKey].chapters[chaptersKey].children,
+				weight: resultObj[resultObjKey].chapters[chaptersKey].weight,
 				id: chaptersKey
 			});
 		}
