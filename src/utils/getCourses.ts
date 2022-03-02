@@ -30,14 +30,14 @@ export default async function getCourses(): Promise<Course[]> {
 		postPromises.push(promise);
 	}
 
-	const posts = await Promise.all(postPromises);
+	const videos = await Promise.all(postPromises);
 
 	let resultObj: Record<
 		string,
 		{ chapters: Record<string, { children: any[]; title: string }>; title: string }
 	> = {};
 
-	posts.forEach((value) => {
+	videos.forEach((value) => {
 		//split path with "/"
 		const pathArray: string[] = value.path.split('/');
 
@@ -75,6 +75,9 @@ export default async function getCourses(): Promise<Course[]> {
 		});
 	});
 
+
+
+
 	let parts = [];
 	for (let resultObjKey in resultObj) {
 		let chaptersInParts = [];
@@ -89,6 +92,11 @@ export default async function getCourses(): Promise<Course[]> {
 
 		//sort chapters par weight
 		chaptersInParts.sort((a, b) => a.weight - b.weight);
+
+		//sort videos per weight
+		chaptersInParts.forEach((chapter) => {
+			chapter.children.sort((a, b) => a.weight - b.weight);
+		});
 
 		parts.push({
 			title: resultObj[resultObjKey].title,
