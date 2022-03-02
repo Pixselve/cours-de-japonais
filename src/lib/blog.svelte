@@ -96,8 +96,8 @@
 
 	<main class="space-y-5 mt-10">
 		<h1 class="text-4xl font-bold">{title}</h1>
-		<div class="prose-sm max-w-full">
+		<article class="prose-sm max-w-full">
 			<slot />
-		</div>
+		</article>
 	</main>
 </main>
