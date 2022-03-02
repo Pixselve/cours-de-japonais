@@ -1,11 +1,9 @@
-import getCourses from "../../utils/getCourses";
+import getCourses from '../../utils/getCourses';
 
 export async function get() {
+	const courses = await getCourses();
 
-  const courses = await getCourses();
-
-
-  return {
-    body: JSON.stringify(courses)
-  };
+	return {
+		body: JSON.stringify(courses)
+	};
 }

@@ -1,5 +1,5 @@
 ---
-videoID: "xnjpl0mNQOQ"
+videoID: 'xnjpl0mNQOQ'
 layout: video
 title: Présentation des katakana
 weight: 2

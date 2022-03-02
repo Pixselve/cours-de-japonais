@@ -18,9 +18,6 @@ export interface Course {
 	id: string;
 }
 
-
-
-
 export default async function getCourses(): Promise<Course[]> {
 	const postPromises = [];
 	const modules = import.meta.glob(`../routes/course/**/*.md`);
