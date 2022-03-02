@@ -58,7 +58,7 @@ import type { Load } from "@sveltejs/kit";
 export const load: Load = async ({ fetch, url }) => {
   const { pathname } = url;
   // use the regex /^\/course\/([a-zA-Z0-9\-\.]+)\/.*$/g in pathname and extract group 1
-  const regex = new RegExp(/^\/course\/([a-zA-Z0-9\-.]+)\/.*$/g);
+  const regex = new RegExp(/^\/course\/([a-zA-Z\d\-.]+)\/.*$/g);
   const match = regex.exec(pathname);
   const course = match && match[1];
   const body = await fetch(`/course/${ course }/chapters.json`).then(value => value.json());
