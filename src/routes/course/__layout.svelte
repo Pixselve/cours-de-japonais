@@ -23,7 +23,7 @@
 	export let course: Course;
 </script>
 
-<main class="bg-gray-100 min-h-screen grid md:grid-cols-[350px_auto]">
+<main class="bg-gray-100 md:h-screen grid md:grid-cols-[350px_auto]">
 	<section class="p-4 space-y-4 order-2 md:order-1">
 		<a href="/" class="p-5 bg-white rounded-3xl shadow-xl md:inline-block hidden">
 			<svg class="h-7 aspect-square fill-japanRed" viewBox="0 0 24 24">
@@ -31,7 +31,9 @@
 			</svg>
 		</a>
 		<nav class="p-5 bg-white rounded-3xl shadow-xl space-y-5 overflow-y-auto max-h-full">
-			<h1 class="font-black text-xl">{course.title}</h1>
+			<h1 class="font-black text-xl">
+				<a class="hover:underline" href={`/course/${course.id}`}>{course.title}</a>
+			</h1>
 			<div class="border-b" />
 
 			<section class="space-y-5 text-sm">
@@ -40,13 +42,18 @@
 					<ol class="space-y-5">
 						{#each chapter.children as lesson, index}
 							<li>
-								<a class="font-bold flex items-center space-x-4" href={'/course' + lesson.path}>
+								<a
+									class="font-bold flex items-center space-x-4 group"
+									href={'/course' + lesson.path}
+								>
 									<div class="text-3xl">
 										{index + 1}
 									</div>
 									<div class="flex-grow space-y-2">
-										<div>{lesson.title}</div>
-										<div class="text-black/50">01:35</div>
+										<div class="group-hover:underline">{lesson.title}</div>
+										{#if lesson.videoLength !== undefined}
+											<div class="text-black/50">{lesson.videoLength}</div>
+										{/if}
 									</div>
 									{#if $doneCourses.has(lesson.videoID)}
 										<div>
