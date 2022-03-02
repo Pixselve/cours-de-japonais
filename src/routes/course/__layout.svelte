@@ -1,6 +1,11 @@
-<main class="bg-gray-100 min-h-screen grid grid-cols-[350px_auto]">
-  <section class="h-screen p-4">
-    <nav class="p-5 bg-white rounded-3xl shadow-xl max-h-full space-y-5 overflow-y-auto">
+<main class="bg-gray-100 min-h-screen grid md:grid-cols-[350px_auto]">
+  <section class="p-4 space-y-4 order-2 md:order-1">
+    <button class="p-5 bg-white rounded-3xl shadow-xl md:block hidden">
+      <svg class="h-7 aspect-square fill-japanRed" viewBox="0 0 24 24">
+        <path d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+      </svg>
+    </button>
+    <nav class="p-5 bg-white rounded-3xl shadow-xl space-y-5 overflow-y-auto max-h-full">
       <h1 class="font-black text-xl">{course.title}</h1>
       <div class="border-b"></div>
 
@@ -34,10 +39,9 @@
 
     </nav>
   </section>
-  <section class="p-4 h-screen overflow-y-scroll">
+  <section class="p-4 md:overflow-y-scroll order-1 md:order-2">
     <slot/>
   </section>
-
 </main>
 
 <script lang="ts">

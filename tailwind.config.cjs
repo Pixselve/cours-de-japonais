@@ -4,7 +4,12 @@ const config = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
-		extend: {}
+		extend: {
+			 // add a new custom color named "japanRed" with hex #EF3340
+			 colors: {
+				 'japanRed': '#EF3340',
+			 },
+		}
 	},
 
 	plugins: [typography]
